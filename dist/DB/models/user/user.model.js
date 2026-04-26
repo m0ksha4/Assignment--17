@@ -4,7 +4,7 @@ exports.User = void 0;
 const mongoose_1 = require("mongoose");
 const common_1 = require("../../../common");
 const schema = new mongoose_1.Schema({
-    userName: { type: String, required: true, minLength: 6, maxlength: 30 },
+    userName: { type: String, required: true, minLength: 4, maxlength: 30 },
     email: { type: String, required: true },
     phoneNumber: { type: String },
     password: { type: String, required: function () {

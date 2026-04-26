@@ -1,5 +1,5 @@
-import { BadRequestExcepation, ConflictExcepation, generateOTP, hash, NotFoundExcepation, sendEmail } from "../../common";
-import { encryption } from "../../common/utils/crypto.utils";
+import { BadRequestExcepation, compaer, ConflictExcepation, generateOTP, hash, NotFoundExcepation, sendEmail, UnAutorizedExcepation } from "../../common";
+import { decryption, encryption } from "../../common/utils/crypto.utils";
 import { UserRepository } from "../../DB/models/user/user.repository";
 import { redisClient } from "../../DB/redis.connect";
 import { deleteFromCache, getFromCache, setIntoCache } from "../../DB/redis.service";
@@ -90,6 +90,16 @@ class AuthService{
             {password:resetPasswordDOT.newPassword})
         await deleteFromCache(`${resetPasswordDOT.email}:otp`);    
     }
-    login(loginDOT:LoginDOT){}
+   async login(loginDOT:LoginDOT){
+      // check userExist
+      const userExist =await this.userRepository.getOne({email:loginDOT.email})
+          if(!userExist){throw new NotFoundExcepation("user not found")}
+          //comper password
+          const match=await compaer(loginDOT.password,userExist.password)
+          if(!match){throw new UnAutorizedExcepation('Invalid credentials')}
+          
+          userExist.phoneNumber=decryption(userExist.phoneNumber as string)
+          return userExist
+    }
 }
 export default new AuthService()

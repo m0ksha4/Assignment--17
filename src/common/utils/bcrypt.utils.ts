@@ -13,6 +13,6 @@ export  const hash=async(password :string)=>{
  * @param hashedPassword which come form DB
  * @returns Promise of boolean
  */
-export const comper=async(password:string,hashedPassword:string)=>{
+export const compaer=async(password:string,hashedPassword:string)=>{
    return bcrypt.compare(password,hashedPassword)
 }

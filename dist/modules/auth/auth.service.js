@@ -98,6 +98,19 @@ class AuthService {
         await this.userRepository.updateOne({ email: resetPasswordDOT.email }, { password: resetPasswordDOT.newPassword });
         await (0, redis_service_1.deleteFromCache)(`${resetPasswordDOT.email}:otp`);
     }
-    login(loginDOT) { }
+    async login(loginDOT) {
+        // check userExist
+        const userExist = await this.userRepository.getOne({ email: loginDOT.email });
+        if (!userExist) {
+            throw new common_1.NotFoundExcepation("user not found");
+        }
+        //comper password
+        const match = await (0, common_1.compaer)(loginDOT.password, userExist.password);
+        if (!match) {
+            throw new common_1.UnAutorizedExcepation('Invalid credentials');
+        }
+        userExist.phoneNumber = (0, crypto_utils_1.decryption)(userExist.phoneNumber);
+        return userExist;
+    }
 }
 exports.default = new AuthService();

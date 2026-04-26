@@ -8,6 +8,7 @@ export type SignupDTO=z.infer<typeof signupSchema>
 
 export interface LoginDOT{
 email:string,
+phoneNumber?:string
 password:string,
 }
 export interface ForgetPasswordDOT{

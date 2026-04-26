@@ -7,7 +7,7 @@ exports.generalFildes = void 0;
 const zod_1 = __importDefault(require("zod"));
 const enums_1 = require("../enums");
 exports.generalFildes = {
-    userName: zod_1.default.string().min(6).max(30),
+    userName: zod_1.default.string().min(2).max(30),
     password: zod_1.default.string()
         .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
     email: zod_1.default.email(),

@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express"
-import { authRouter } from "./modules"
+import { authRouter, commentRouter, postRouter } from "./modules"
 import { BadRequestExcepation } from "./common"
 import { connectDB } from "./DB/connection"
 import { redisConnect } from "./DB/redis.connect"
@@ -13,7 +13,8 @@ export function bootstrap() {
   app.use(express.json())
 //routing app
 app.use("/auth",authRouter)
-
+app.use("/post",postRouter)
+app.use("/comment",commentRouter)
 
 
 

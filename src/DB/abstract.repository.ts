@@ -1,8 +1,12 @@
 import { Model, ProjectionType, QueryFilter, QueryOptions, UpdateQuery } from "mongoose";
 
-export abstract class AbstractRepository<T>{
+export abstract class  AbstractRepository<T>{
 
     constructor(private _model:Model<T>){}
+    
+    get model(){
+    return this._model
+                }
 
     public async create(item:Partial<T>){
         const doc =new this._model(item)

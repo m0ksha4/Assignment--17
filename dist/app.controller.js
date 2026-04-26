@@ -18,6 +18,8 @@ function bootstrap() {
     app.use(express_1.default.json());
     //routing app
     app.use("/auth", modules_1.authRouter);
+    app.use("/post", modules_1.postRouter);
+    app.use("/comment", modules_1.commentRouter);
     //global error handler
     app.use((error, req, res, next) => {
         res.status(error.cause || 500).json({

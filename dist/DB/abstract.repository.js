@@ -6,6 +6,9 @@ class AbstractRepository {
     constructor(_model) {
         this._model = _model;
     }
+    get model() {
+        return this._model;
+    }
     async create(item) {
         const doc = new this._model(item);
         return doc.save();

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.comper = exports.hash = void 0;
+exports.compaer = exports.hash = void 0;
 const bcrypt = __importStar(require("bcrypt"));
 /**
  * @param password plaintext passworf
@@ -49,7 +49,7 @@ exports.hash = hash;
  * @param hashedPassword which come form DB
  * @returns Promise of boolean
  */
-const comper = async (password, hashedPassword) => {
+const compaer = async (password, hashedPassword) => {
     return bcrypt.compare(password, hashedPassword);
 };
-exports.comper = comper;
+exports.compaer = compaer;

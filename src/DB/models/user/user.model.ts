@@ -5,7 +5,7 @@ import { IUser, SYS_GENDER, SYS_PROVIDER, SYS_ROLE } from "../../../common";
 
 
 const schema =new Schema<IUser>({
-    userName:{type:String,required:true,minLength:6,maxlength:30},
+    userName:{type:String,required:true,minLength:4,maxlength:30},
     email:{type:String,required:true},
     phoneNumber:{type:String},
     password:{type:String,required:function()
